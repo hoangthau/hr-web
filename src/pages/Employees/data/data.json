@@ -1,0 +1,22 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "John Smith",
+      "email": "john@ayp-group.com",
+      "isActive": true
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane@ayp-group.com",
+      "isActive": false
+    },
+    {
+      "id": 3,
+      "name": "Tom Smith",
+      "email": "tom@ayp-group.com",
+      "isActive": true
+    }
+  ]
+}
