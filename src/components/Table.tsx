@@ -3,13 +3,14 @@ import React from 'react';
 interface TableProps {
   rows: Array<unknown>;
   columns: Array<string>;
+  onUpdate: () => void;
 }
 
 interface RowItem {
   [key: string]: string | boolean;
 }
 
-function Table({ rows, columns }: TableProps) {
+export function Table({ rows, columns, onUpdate }: TableProps) {
   return (
     <table className="table table-bordered table-striped">
       <thead>
@@ -29,7 +30,11 @@ function Table({ rows, columns }: TableProps) {
               <td>{row.name}</td>
               <td>{row.email}</td>
               <td>{row.isActive ? 'ACTIVE' : 'DEACTIVATED'}</td>
-              <td>Action</td>
+              <td>
+                <button className="btn btn-primary" onClick={onUpdate}>
+                  Update
+                </button>
+              </td>
             </tr>
           );
         })}
@@ -37,5 +42,3 @@ function Table({ rows, columns }: TableProps) {
     </table>
   );
 }
-
-export default Table;
