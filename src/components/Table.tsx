@@ -1,13 +1,16 @@
 import React from 'react';
 
-interface TableProps {
-  rows: Array<unknown>;
-  columns: Array<string>;
-  onUpdate: () => void;
+interface RowItem {
+  id: number;
+  name: string;
+  email: string;
+  isActive: boolean;
 }
 
-interface RowItem {
-  [key: string]: string | boolean;
+interface TableProps {
+  rows: Array<RowItem>;
+  columns: Array<string>;
+  onUpdate: () => void;
 }
 
 export function Table({ rows, columns, onUpdate }: TableProps) {
@@ -23,7 +26,7 @@ export function Table({ rows, columns, onUpdate }: TableProps) {
         </tr>
       </thead>
       <tbody>
-        {rows.map((row: any) => {
+        {rows.map((row: RowItem) => {
           return (
             <tr key={row.id}>
               <td>{row.id}</td>
