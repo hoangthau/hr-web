@@ -2,7 +2,14 @@ import React from 'react';
 import './Modal.css';
 import { Button } from '../Button';
 
-export function Modal({ title, isOpen, onClose, children }: any) {
+interface ModalProps {
+  title: string;
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+}
+
+export function Modal({ title, isOpen, onClose, children }: ModalProps) {
   return (
     <>
       {isOpen && (
