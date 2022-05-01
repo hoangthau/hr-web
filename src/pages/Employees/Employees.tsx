@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { Employee, getData, selectEmployees } from './data/employeeSlice';
-import data from './data/data.json';
+import { Employee, selectEmployees, fetchData, selectStatus } from './data/employeeSlice';
 import './Employees.css';
 import { Table, TableBody, TableHead, TableRow, TableCell } from '../../components/Table/Table';
 import { Modal, Button } from '../../components';
@@ -18,9 +17,10 @@ function Employees() {
 
   const dispatch = useAppDispatch();
   const employees = useAppSelector(selectEmployees);
+  const status = useAppSelector(selectStatus);
 
   useEffect(() => {
-    dispatch(getData(data.employees));
+    dispatch(fetchData());
   }, [dispatch]);
 
   const toggleModal = () => {
@@ -31,6 +31,14 @@ function Employees() {
     toggleModal();
     setSelectedEmployee(user);
   };
+
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+  if (status === 'failed') {
+    return <div>Can not get data from API</div>;
+  }
 
   return (
     <div className="employees-page">

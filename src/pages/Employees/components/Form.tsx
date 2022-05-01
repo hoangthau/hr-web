@@ -9,37 +9,36 @@ interface FormProps {
 }
 
 export function Form({ selectedEmployee, onSubmit }: FormProps) {
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [status, setStatus] = useState<boolean>(true);
-
+  const [formState, setFormState] = useState({ name: '', email: '', isActive: false });
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setName(selectedEmployee.name);
-    setEmail(selectedEmployee.email);
-    setStatus(selectedEmployee.isActive);
+    const { name, email, isActive } = selectedEmployee;
+    setFormState({
+      name,
+      email,
+      isActive
+    });
   }, [selectedEmployee]);
 
-  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
-
-  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const handleStatus = () => {
-    setStatus((status) => !status);
+  const handleFormState = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    if (name === 'isActive') {
+      setFormState({ ...formState, isActive: e.target.checked });
+    } else {
+      setFormState({ ...formState, [name]: value });
+    }
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const { name, email, isActive } = formState;
     const employee = {
       id: selectedEmployee.id,
       name,
       email,
-      isActive: status
+      isActive
     };
     dispatch(updateEmployee(employee));
     onSubmit();
@@ -55,9 +54,9 @@ export function Form({ selectedEmployee, onSubmit }: FormProps) {
           <TextInput
             type="text"
             className="form-control"
-            id="name"
-            value={name}
-            onChange={handleName}
+            name="name"
+            value={formState?.name}
+            onChange={handleFormState}
           />
         </div>
       </div>
@@ -69,9 +68,9 @@ export function Form({ selectedEmployee, onSubmit }: FormProps) {
           <TextInput
             type="text"
             className="form-control"
-            id="email"
-            value={email}
-            onChange={handleEmail}
+            name="email"
+            value={formState?.email}
+            onChange={handleFormState}
           />
         </div>
       </div>
@@ -79,7 +78,7 @@ export function Form({ selectedEmployee, onSubmit }: FormProps) {
         <label className="col-sm-2 col-form-label">Status</label>
         <div className="col-sm-10">
           <div className="form-check form-switch">
-            <Switch checked={status} onChange={handleStatus} />
+            <Switch name="isActive" checked={formState.isActive} onChange={handleFormState} />
           </div>
         </div>
       </div>

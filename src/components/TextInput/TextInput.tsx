@@ -6,8 +6,8 @@ interface InputProps {
   role?: string;
   type?: string;
   value?: string;
+  name?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  checked?: boolean;
 }
 
 export function TextInput({
@@ -17,7 +17,7 @@ export function TextInput({
   className,
   id,
   role,
-  checked,
+  name,
   ...props
 }: InputProps) {
   return (
@@ -28,7 +28,7 @@ export function TextInput({
       className={className}
       id={id}
       role={role}
-      checked={checked}
+      name={name}
       {...props}
     />
   );
