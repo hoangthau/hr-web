@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { RootState } from '../../../app/store';
+import { RootState } from 'app/store';
 import employeesData from './data.json';
 export interface Employee {
   id: number;

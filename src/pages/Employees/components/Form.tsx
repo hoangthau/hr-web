@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useAppDispatch } from '../../../app/hooks';
+import { useAppDispatch } from 'app/hooks';
+import { TextInput, Switch } from 'components';
 import { Employee, updateEmployee } from '../data/employeeSlice';
-import { TextInput, Switch } from '../../../components';
-
 interface FormProps {
   selectedEmployee: Employee;
   onSubmit: () => void;

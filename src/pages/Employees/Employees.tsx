@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { Employee, selectEmployees, fetchData, selectStatus } from './data/employeeSlice';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useAppSelector, useAppDispatch } from 'app/hooks';
 import './Employees.css';
-import { Table, TableBody, TableHead, TableRow, TableCell } from '../../components/Table/Table';
-import { Modal, Button } from '../../components';
+import { Table, TableBody, TableHead } from 'components/Table/Table';
+import { Modal } from 'components';
+
+import { Employee, selectEmployees, fetchData, selectStatus } from './data/employeeSlice';
 import { Form } from './components/Form';
+import EmployeeRow from './components/EmployeeRow';
 
 function Employees() {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -27,10 +29,10 @@ function Employees() {
     setIsOpenModal((isOpen) => !isOpen);
   };
 
-  const handleUpdate = (user: Employee) => {
+  const handleUpdate = useCallback((user: Employee) => {
     toggleModal();
     setSelectedEmployee(user);
-  };
+  }, []);
 
   if (status === 'loading') {
     return <div>Loading...</div>;
@@ -47,21 +49,7 @@ function Employees() {
         <TableHead columns={['ID', 'Name', 'Email', 'Status', 'Action']} />
         <TableBody>
           {employees.map((employee) => {
-            return (
-              <TableRow key={employee.id}>
-                <TableCell>{employee.id}</TableCell>
-                <TableCell>{employee.name}</TableCell>
-                <TableCell>{employee.email}</TableCell>
-                <TableCell>{employee.isActive ? 'ACTIVE' : 'DEACTIVATED'}</TableCell>
-                <TableCell>
-                  {employee.isActive && (
-                    <Button variant="primary" onClick={() => handleUpdate(employee)}>
-                      Update
-                    </Button>
-                  )}
-                </TableCell>
-              </TableRow>
-            );
+            return <EmployeeRow key={employee.id} employee={employee} onUpdate={handleUpdate} />;
           })}
         </TableBody>
       </Table>
