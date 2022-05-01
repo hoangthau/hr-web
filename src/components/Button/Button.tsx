@@ -23,8 +23,8 @@ export function Button({
       type={type}
       className={`${className ? className : `btn btn-${variant}`}`}
       onClick={onClick}
-      {...props}
-      form={form}>
+      form={form}
+      {...props}>
       {children}
     </button>
   );

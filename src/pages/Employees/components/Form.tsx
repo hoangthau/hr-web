@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../app/hooks';
 import { Employee, updateEmployee } from '../data/employeeSlice';
-import { TextInput } from '../../../components/TextInput';
+import { TextInput, Switch } from '../../../components';
 
 interface FormProps {
   selectedEmployee: Employee;
@@ -79,13 +79,7 @@ export function Form({ selectedEmployee, onSubmit }: FormProps) {
         <label className="col-sm-2 col-form-label">Status</label>
         <div className="col-sm-10">
           <div className="form-check form-switch">
-            <TextInput
-              className="form-check-input"
-              type="checkbox"
-              role="switch"
-              checked={status}
-              onChange={handleStatus}
-            />
+            <Switch checked={status} onChange={handleStatus} />
           </div>
         </div>
       </div>

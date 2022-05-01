@@ -3,9 +3,8 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { Employee, getData, selectEmployees } from './data/employeeSlice';
 import data from './data/data.json';
 import './Employees.css';
-import { Table, TableBody, TableHead, TableRow, TableCell } from '../../components/Table';
-import { Modal } from '../../components/Modal';
-import { Button } from '../../components/Button';
+import { Table, TableBody, TableHead, TableRow, TableCell } from '../../components/Table/Table';
+import { Modal, Button } from '../../components';
 import { Form } from './components/Form';
 
 function Employees() {
