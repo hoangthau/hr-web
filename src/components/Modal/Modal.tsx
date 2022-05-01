@@ -3,13 +3,13 @@ import './Modal.css';
 import { Button } from '../Button';
 
 interface ModalProps {
-  title: string;
-  isOpen: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
+  title?: string;
+  isOpen?: boolean;
+  onClose?: () => void;
+  children?: React.ReactNode;
 }
 
-export function Modal({ title, isOpen, onClose, children }: ModalProps) {
+export function Modal({ title = '', isOpen = false, onClose, children }: ModalProps) {
   return (
     <>
       {isOpen && (
