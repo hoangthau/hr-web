@@ -37,7 +37,7 @@ function Employees() {
   }
 
   if (status === 'failed') {
-    return <div>Can not get data from API</div>;
+    return <p className="text-danger">Can not get data from API</p>;
   }
 
   return (

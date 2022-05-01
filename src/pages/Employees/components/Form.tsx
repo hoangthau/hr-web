@@ -9,7 +9,9 @@ interface FormProps {
 }
 
 export function Form({ selectedEmployee, onSubmit }: FormProps) {
-  const [formState, setFormState] = useState({ name: '', email: '', isActive: false });
+  const { name, email, isActive } = selectedEmployee;
+  const [formState, setFormState] = useState({ name, email, isActive });
+  const [error, setError] = useState(false);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -20,6 +22,15 @@ export function Form({ selectedEmployee, onSubmit }: FormProps) {
       isActive
     });
   }, [selectedEmployee]);
+
+  useEffect(() => {
+    const { name, email } = formState;
+    if (!name || !email) {
+      setError(true);
+    } else {
+      setError(false);
+    }
+  }, [formState]);
 
   const handleFormState = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -40,15 +51,17 @@ export function Form({ selectedEmployee, onSubmit }: FormProps) {
       email,
       isActive
     };
-    dispatch(updateEmployee(employee));
-    onSubmit();
+    if (name && email) {
+      dispatch(updateEmployee(employee));
+      onSubmit();
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} id="employeeForm">
       <div className="mb-3 row">
         <label htmlFor="name" className="col-sm-2 col-form-label">
-          Name
+          Name*
         </label>
         <div className="col-sm-10">
           <TextInput
@@ -62,7 +75,7 @@ export function Form({ selectedEmployee, onSubmit }: FormProps) {
       </div>
       <div className="mb-3 row">
         <label htmlFor="email" className="col-sm-2 col-form-label">
-          Email
+          Email*
         </label>
         <div className="col-sm-10">
           <TextInput
@@ -82,6 +95,7 @@ export function Form({ selectedEmployee, onSubmit }: FormProps) {
           </div>
         </div>
       </div>
+      {error && <p className="text-danger">Please input all required information</p>}
     </form>
   );
 }
