@@ -1,4 +1,5 @@
 import React from 'react';
+import './Table.css';
 interface TableChildrenProps {
   children: React.ReactNode;
 }
@@ -34,5 +35,9 @@ export function TableRow({ children }: TableChildrenProps) {
 }
 
 export function Table({ children }: TableChildrenProps) {
-  return <table className="table table-bordered table-striped">{children}</table>;
+  return (
+    <div className="table-responsive">
+      <table className="table table-bordered table-striped">{children}</table>
+    </div>
+  );
 }
