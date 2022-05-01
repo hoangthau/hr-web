@@ -1,7 +1,8 @@
 import React from 'react';
 import './Modal.css';
+import { Button } from './Button';
 
-export function Modal({ title, isOpen, onClose, children }: any) {
+export function Modal({ title, isOpen, onClose, children, onSubmit }: any) {
   return (
     <>
       {isOpen && (
@@ -11,20 +12,16 @@ export function Modal({ title, isOpen, onClose, children }: any) {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title">{title}</h5>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    onClick={onClose}
-                    aria-label="Close"></button>
+                  <Button className="btn-close" onClick={onClose}></Button>
                 </div>
                 <div className="modal-body">{children}</div>
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-secondary" onClick={onClose}>
+                  <Button type="button" variant="secondary" onClick={onClose}>
                     Close
-                  </button>
-                  <button type="button" className="btn btn-primary">
+                  </Button>
+                  <Button type="button" variant="primary" onClick={onSubmit}>
                     Save
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>

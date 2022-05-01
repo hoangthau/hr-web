@@ -5,6 +5,7 @@ import data from './data/data.json';
 import './Employees.css';
 import { Table, TableBody, TableHead, TableRow, TableCell } from '../../components/Table';
 import { Modal } from '../../components/Modal';
+import { Button } from '../../components/Button';
 
 function Employees() {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -33,9 +34,9 @@ function Employees() {
                 <TableCell>{employee.email}</TableCell>
                 <TableCell>{employee.isActive ? 'ACTIVE' : 'DEACTIVATED'}</TableCell>
                 <TableCell>
-                  <button className="btn btn-primary" onClick={toggleModal}>
+                  <Button variant="primary" onClick={toggleModal}>
                     Update
-                  </button>
+                  </Button>
                 </TableCell>
               </TableRow>
             );
