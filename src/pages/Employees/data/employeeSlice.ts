@@ -22,11 +22,21 @@ export const employeeSlice = createSlice({
   reducers: {
     getData: (state, action: PayloadAction<Array<Employee>>) => {
       state.data = action.payload;
+    },
+    updateEmployee: (state, action: PayloadAction<Employee>) => {
+      const updatedData = state.data.map((item) => {
+        if (item.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return item;
+        }
+      });
+      state.data = updatedData;
     }
   }
 });
 
-export const { getData } = employeeSlice.actions;
+export const { getData, updateEmployee } = employeeSlice.actions;
 
 export const selectEmployees = (state: RootState) => state.employees.data;
 

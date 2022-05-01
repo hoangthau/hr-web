@@ -3,9 +3,9 @@
 }
 
 .modal .modal-dialog {
-  max-width: 800px;
+  max-width: 650px;
 }
 
 .modal .modal-body {
-  padding: 50px;
+  padding: 40px;
 }

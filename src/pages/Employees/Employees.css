@@ -1,4 +1,14 @@
 .employees-page {
-    max-width: 860px;
-    margin: 50px auto;
+  max-width: 860px;
+  margin: 50px auto;
+}
+
+.title {
+  margin-bottom: 40px;
+}
+
+.form-check.form-switch {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
