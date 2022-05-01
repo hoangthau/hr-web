@@ -2,7 +2,7 @@ import React from 'react';
 import './Modal.css';
 import { Button } from './Button';
 
-export function Modal({ title, isOpen, onClose, children, onSubmit }: any) {
+export function Modal({ title, isOpen, onClose, children }: any) {
   return (
     <>
       {isOpen && (
@@ -19,7 +19,7 @@ export function Modal({ title, isOpen, onClose, children, onSubmit }: any) {
                   <Button type="button" variant="secondary" onClick={onClose}>
                     Close
                   </Button>
-                  <Button type="button" variant="primary" onClick={onSubmit}>
+                  <Button type="submit" form="employeeForm" variant="primary">
                     Save
                   </Button>
                 </div>

@@ -3,9 +3,10 @@ import React from 'react';
 interface ButtonProps {
   variant?: string;
   children?: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   type?: 'button' | 'submit' | 'reset' | undefined;
   className?: string;
+  form?: string;
 }
 
 export function Button({
@@ -14,6 +15,7 @@ export function Button({
   onClick,
   type = 'button',
   className,
+  form,
   ...props
 }: ButtonProps) {
   return (
@@ -21,7 +23,8 @@ export function Button({
       type={type}
       className={`${className ? className : `btn btn-${variant}`}`}
       onClick={onClick}
-      {...props}>
+      {...props}
+      form={form}>
       {children}
     </button>
   );
