@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { getData, selectEmployees } from './data/employeeSlice';
 import data from './data/data.json';
 import './Employees.css';
-import { Table } from '../../components/Table';
+import { Table, TableBody, TableHead, TableRow, TableCell } from '../../components/Table';
 import { Modal } from '../../components/Modal';
 
 function Employees() {
@@ -22,11 +22,26 @@ function Employees() {
   return (
     <div className="employees-page">
       <h2>Manage Employees</h2>
-      <Table
-        rows={employees}
-        columns={['ID', 'Name', 'Email', 'Status', 'Action']}
-        onUpdate={toggleModal}
-      />
+      <Table>
+        <TableHead columns={['ID', 'Name', 'Email', 'Status', 'Action']} />
+        <TableBody>
+          {employees.map((employee) => {
+            return (
+              <TableRow key={employee.id}>
+                <TableCell>{employee.id}</TableCell>
+                <TableCell>{employee.name}</TableCell>
+                <TableCell>{employee.email}</TableCell>
+                <TableCell>{employee.isActive ? 'ACTIVE' : 'DEACTIVATED'}</TableCell>
+                <TableCell>
+                  <button className="btn btn-primary" onClick={toggleModal}>
+                    Update
+                  </button>
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
       <Modal title="Update Employee" isOpen={isOpenModal} onClose={toggleModal}>
         <form>
           <div className="mb-3 row">

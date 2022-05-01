@@ -1,47 +1,38 @@
 import React from 'react';
-
-interface RowItem {
-  id: number;
-  name: string;
-  email: string;
-  isActive: boolean;
+interface TableChildrenProps {
+  children: React.ReactNode;
 }
 
-interface TableProps {
-  rows: Array<RowItem>;
+interface TableHeadProps {
   columns: Array<string>;
-  onUpdate: () => void;
 }
 
-export function Table({ rows, columns, onUpdate }: TableProps) {
+export function TableHead({ columns }: TableHeadProps) {
   return (
-    <table className="table table-bordered table-striped">
-      <thead>
-        <tr>
-          {columns.map((col: string) => (
-            <th key={col} scope="col">
-              {col}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((row: RowItem) => {
-          return (
-            <tr key={row.id}>
-              <td>{row.id}</td>
-              <td>{row.name}</td>
-              <td>{row.email}</td>
-              <td>{row.isActive ? 'ACTIVE' : 'DEACTIVATED'}</td>
-              <td>
-                <button className="btn btn-primary" onClick={onUpdate}>
-                  Update
-                </button>
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <thead>
+      <tr>
+        {columns.map((col: string) => (
+          <th key={col} scope="col">
+            {col}
+          </th>
+        ))}
+      </tr>
+    </thead>
   );
+}
+
+export function TableCell({ children }: TableChildrenProps) {
+  return <td>{children}</td>;
+}
+
+export function TableBody({ children }: TableChildrenProps) {
+  return <tbody>{children}</tbody>;
+}
+
+export function TableRow({ children }: TableChildrenProps) {
+  return <tr>{children}</tr>;
+}
+
+export function Table({ children }: TableChildrenProps) {
+  return <table className="table table-bordered table-striped">{children}</table>;
 }
